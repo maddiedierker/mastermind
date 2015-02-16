@@ -1,5 +1,5 @@
 # This class checks if computer guesses are correct based on user input
-require './mastermind_turn'
+require './game'
 
 class GuessChecker
     attr_accessor :guess

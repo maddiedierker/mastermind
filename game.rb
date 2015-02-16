@@ -1,7 +1,7 @@
 # This class creates the computer's guesses for each turn, then checks if they are correct using the Check class
-require './mastermind_check'
+require './guess_checker'
 
-class Turn
+class Game
     attr_accessor :turn_counter
     COLORS = ['RED','GREEN','ORANGE','YELLOW','BLUE','PURPLE']
 
@@ -12,7 +12,7 @@ class Turn
 
     # The first turn of each game will be a random guess of 4 colors by the computer
     def first_turn
-        turn1 = colors.sample(4)
+        turn1 = COLORS.sample(4)
         @turn_counter += 1
         puts "TURN #{turn_counter}: #{turn1}"
         check_if_turn_correct?(turn1)
