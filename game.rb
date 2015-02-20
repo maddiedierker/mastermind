@@ -1,24 +1,26 @@
-# This class creates the computer's guesses for each turn, then checks if they are correct using the Check class
-require './guess_checker'
+# This class creates the computer's guesses for each turn, then checks if they are correct using the GuessChecker class
+require './guess_scorer'
+require './code_mapper'
 
 class Game
     attr_accessor :turn_counter
-    COLORS = ['RED','GREEN','ORANGE','YELLOW','BLUE','PURPLE']
 
     def initialize(turn_counter)
         @turn_counter = turn_counter
-        first_turn
+        @first_guess = '0011'
+        guess_generator
     end
 
-    # The first turn of each game will be a random guess of 4 colors by the computer
-    def first_turn
-        turn1 = COLORS.sample(4)
-        @turn_counter += 1
-        puts "TURN #{turn_counter}: #{turn1}"
-        check_if_turn_correct?(turn1)
-    end
-
-    def check_if_turn_correct?(turn)
-        turn_check = GuessChecker.new(turn)
+    def guess_generator
+        if @turn_counter == 1
+            new_code_to_map = CodeMapper.new
+            first_guess_with_colors = new_code_to_map.map_code_to_colors(@first_guess)
+            puts "TURN #{turn_counter}: #{first_guess_with_colors}"
+            first_guess_score = GuessScorer.new(first_guess_with_colors)
+            @turn_counter += 1
+        elsif @turn_counter > 1 && @turn_counter < 10
+        else
+            puts "I lost! You win this time, human..."
+        end
     end
 end

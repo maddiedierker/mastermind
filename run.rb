@@ -9,5 +9,5 @@ rule_confirmation = gets.chomp
 game_rules = Rules.new(rule_confirmation)
 
 # Computer begins guessing code
-turn_counter = 0
+turn_counter = 1
 new_game = Game.new(turn_counter)
